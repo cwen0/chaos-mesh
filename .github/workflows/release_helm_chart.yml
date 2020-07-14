@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - master
-    paths:
-      - "helm/chaos-mesh/**"
+#    paths:
+#      - "helm/chaos-mesh/**"
 
 jobs:
   release:
@@ -16,8 +16,8 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name "cwen0"
-          git config user.email "cwen0@users.noreply.github.com"
+          git config user.name "${{ secrets.USER }}"
+          git config user.email "${{ secrets.EMAIL }}"
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.0.0-rc.2
