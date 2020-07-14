@@ -1,0 +1,12 @@
+apiVersion: v1
+entries:
+  chaos-mesh:
+  - apiVersion: v1
+    created: "2020-07-14T03:10:26.305655777Z"
+    description: A Helm chart for Kubernetes
+    digest: 22c8fe81adfd3ed6473335315f6f1c0d2b0a955b967a9406a1519293e2b33e50
+    name: chaos-mesh
+    urls:
+    - https://cwen0.github.io/chaos-mesh/chaos-mesh-v0.1.0.tgz
+    version: v0.1.0
+generated: "2020-07-14T03:10:26.303383864Z"
