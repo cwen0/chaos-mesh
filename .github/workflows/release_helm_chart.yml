@@ -2,25 +2,17 @@ name: Release helm chart files
 
 on:
   push:
-    branches:
-      - master
+    tags: 'v*'
 
 jobs:
-  release:
+  release-chart:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Configure Git
-        run: |
-          git config user.name "${{ secrets.USER }}"
-          git config user.email "${{ secrets.EMAIL }}"
-
-      - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.0.0-rc.2
+      - uses: actions/checkout@v2
+      - name: Publish Helm chart
+        uses: stefanprodan/helm-gh-pages@master
         with:
-          charts_dir: "helm"
-          charts_repo_url: "https://cwen0.github.io/chaos-mesh"
-        env:
-          CR_TOKEN: "${{ secrets.CR_TOKEN }}"
+          token: ${{ secrets.CR_TOKEN }}
+          charts_dir: helm
+          branch: gh-pages
+
