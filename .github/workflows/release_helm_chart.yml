@@ -21,6 +21,6 @@ jobs:
         uses: helm/chart-releaser-action@v1.0.0-rc.2
         with:
           charts_dir: "helm"
-          charts_rep: "https://cwen0.github.io/chaos-mesh"
+          charts_repo_url: "https://cwen0.github.io/chaos-mesh"
         env:
           CR_TOKEN: "${{ secrets.CR_TOKEN }}"
