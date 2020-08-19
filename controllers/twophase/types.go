@@ -61,6 +61,8 @@ func (r *Reconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 	}
 	chaos := _chaos.(v1alpha1.InnerSchedulerObject)
 
+	r.Log.Info("chaos", "chaos", chaos)
+
 	duration, err := chaos.GetDuration()
 	if err != nil {
 		r.Log.Error(err, "failed to get chaos duration")
@@ -159,7 +161,9 @@ func (r *Reconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 			return ctrl.Result{Requeue: true}, err
 		}
 
+		r.Log.Info("set nextStart", "nextStart", nextStart)
 		chaos.SetNextStart(*nextStart)
+		r.Log.Info("set nextRecover", "nextRecover", nextRecover)
 		chaos.SetNextRecover(nextRecover)
 	} else {
 		nextTime := chaos.GetNextStart()
@@ -173,10 +177,13 @@ func (r *Reconciler) Reconcile(req ctrl.Request) (ctrl.Result, error) {
 		return ctrl.Result{RequeueAfter: duration}, nil
 	}
 
+	r.Log.Info("update chaos", "chaos object", chaos)
 	if err := r.Update(ctx, chaos); err != nil {
 		r.Log.Error(err, "unable to update chaos status")
 		return ctrl.Result{}, err
 	}
+
+	r.Log.Info("reconciler success")
 
 	return ctrl.Result{}, nil
 }
@@ -209,8 +216,10 @@ func applyAction(
 		return err
 	}
 
+	r.Log.Info("Set status", "status", status)
 	status.Experiment.StartTime = &metav1.Time{Time: time.Now()}
 	status.Experiment.Phase = v1alpha1.ExperimentPhaseRunning
 	status.Experiment.Duration = duration.String()
+	r.Log.Info("Set status successfully", "status", status)
 	return nil
 }

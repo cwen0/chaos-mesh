@@ -108,6 +108,9 @@ func (r *Reconciler) Apply(ctx context.Context, req ctrl.Request, chaos v1alpha1
 		}
 		podchaos.Status.Experiment.PodRecords = append(podchaos.Status.Experiment.PodRecords, ps)
 	}
+
+	r.Log.Info("apply pod-failure successfully")
+
 	r.Event(podchaos, v1.EventTypeNormal, utils.EventChaosInjected, "")
 	return nil
 }
@@ -249,6 +252,8 @@ func (r *Reconciler) failPod(ctx context.Context, pod *v1.Pod, podchaos *v1alpha
 	}
 
 	podchaos.Status.Experiment.PodRecords = append(podchaos.Status.Experiment.PodRecords, ps)
+
+	r.Log.Info("inject pod-failure successfully", "podchaos", podchaos)
 
 	return nil
 }
