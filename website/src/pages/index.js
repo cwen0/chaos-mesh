@@ -6,7 +6,7 @@ import styles from './styles.module.css'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
-const installChaosMesh = 'curl -sSL https://mirrors.chaos-mesh.org/latest/install.sh | bash'
+const installChaosMesh = 'curl -sSL https://mirrors.chaos-mesh.org/v0.9.0/install.sh | bash'
 
 const features = [
   {
