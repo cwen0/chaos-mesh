@@ -49,9 +49,7 @@ var (
 
 	// EventCoalesceWindow is the window for coalescing events from ConfigMapWatcher
 	EventCoalesceWindow = time.Second * 3
-)
 
-var (
 	printVersion bool
 )
 
@@ -77,7 +75,7 @@ func main() {
 	// set RPCTimeout config
 	utils.RPCTimeout = common.ControllerCfg.RPCTimeout
 
-	ctrl.SetLogger(zap.Logger(true))
+	ctrl.SetLogger(zap.New(zap.UseDevMode(true)))
 
 	mgr, err := ctrl.NewManager(ctrl.GetConfigOrDie(), ctrl.Options{
 		Scheme:             scheme,
